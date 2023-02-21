@@ -17,15 +17,24 @@ class KnightPathFinder
     # For each position in the array, a new child node is created with that position as its value, and then added as a child to the current node. 
     #  Finally, each new child node is added to the queue to be processed in the next iteration. The method continues to iterate through the queue until it is empty, at which point the entire tree has been built.
 
+    # def build_move_tree
+    #     queue = [@root_node]
+    #     until queue.empty?
+    #         node = queue.shift #[1, 6]
+    #         new_move_positions(node.value).each do |pos|
+    #             child = PolyTreeNode.new(pos)
+    #             node.add_child(child)
+    #             queue << child
+    #         end
+    #     end
+    # end
+
     def build_move_tree
         queue = [@root_node]
+
         until queue.empty?
             node = queue.shift
-            new_move_positions(node.value).each do |pos|
-                child = PolyTreeNode.new(pos)
-                node.add_child(child)
-                queue << child
-            end
+            new_move_positions(node)
         end
     end
 
@@ -50,9 +59,11 @@ class KnightPathFinder
         # moves = pos
         if valid_moves(pos)
             # pos.select { |move| !@considered_positions.include?(move) ? @considered_positions << pos :  }
-            @considered_positions << pos if !@considered_positions.include?(pos)
-                
-            # end
+            if !@considered_positions.include?(pos)
+                @considered_positions << pos 
+            else
+                raise ArgumentError.new "The position is not valid."
+            end
         end
 
         pos
