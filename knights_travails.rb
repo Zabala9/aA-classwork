@@ -51,15 +51,12 @@ class KnightPathFinder
         pos
     end
 
-    def find_path(pos)
-        if @considered_positions.include?(pos)
-            @considered_positions.each_with_index do |ele, idx|
-                if ele == pos
-                    return @considered_positions[0..idx]
-                end
-            end
-        end
-    end
+    def find_path(end_pos)  
+        end_node = @root_node.dfs(end_pos)
+        trace_path_back(end_node)
+    end 
+    
+
 
 # this is a test comment
 end
