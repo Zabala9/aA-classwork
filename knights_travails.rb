@@ -10,6 +10,13 @@ class KnightPathFinder
         # self.build_move_tree
     end
 
+
+    #  The method starts by initializing a queue with the root node of the tree. It then iteratively processes each node in the queue by 
+    # removing it from the queue and adding child nodes for each legal move that can be made from the current node's state.
+    #  This is done by calling the method new_move_positions on the current node's value, which returns an array of positions that can be reached by making a legal move from the current state. 
+    # For each position in the array, a new child node is created with that position as its value, and then added as a child to the current node. 
+    #  Finally, each new child node is added to the queue to be processed in the next iteration. The method continues to iterate through the queue until it is empty, at which point the entire tree has been built.
+
     def build_move_tree
         queue = [@root_node]
         until queue.empty?
@@ -60,12 +67,12 @@ class KnightPathFinder
     #         end
     #     end
     # end
-
+    
     def find_path(end_pos)  
         end_node = @root_node.dfs(end_pos)
         trace_path_back(end_node)
     end 
-    
+        
     def trace_path_back(end_node)
         path = []
 
@@ -77,5 +84,6 @@ class KnightPathFinder
 
         path.reverse
     end
+    
 # this is a test comment
 end
